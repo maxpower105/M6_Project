@@ -45,6 +45,7 @@ class Character(ABC):
 
         from mugwump_Ziller import Mugwump
         from Warrior_Ziller import Warrior
+        from Reddy_Kilowatt import Reddy_Kilowatt
 
         full_path = os.path.abspath(filename)
         with open(full_path, 'r') as f:
@@ -53,6 +54,8 @@ class Character(ABC):
             character = Mugwump()
         elif data['class'] == 'Warrior':
             character = Warrior()
+        elif data['class'] == "Reddy_Kilowatt":
+            character = Reddy_Kilowatt()
         else:
             raise ValueError("Unknown character class in save file.")
         character.name = data['name']

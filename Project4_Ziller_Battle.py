@@ -2,7 +2,7 @@ from die_Ziller import Die
 from Player_Ziller import Character
 from mugwump_Ziller import Mugwump
 from Warrior_Ziller import Warrior
-
+from Reddy_Kilowatt import Reddy_Kilowatt
 def initial_menu():
     print("1. Create a new character")
     print("2. Load a character from a save file")
@@ -21,6 +21,7 @@ def create_new_character():
     print("Choose your character:")
     print("1. Warrior")
     print("2. Mugwump")
+    print("3. Reddy Kilowatt")
     player_choice = int(input("Enter choice: "))
 
     # basic boolean output based on user choice, added line for ai portion
@@ -29,6 +30,9 @@ def create_new_character():
         player_ai = False
     elif player_choice == 2:
         player = Mugwump()
+        player_ai = False
+    elif player_choice == 3:
+        player = Reddy_Kilowatt()
         player_ai = False
     else:
         print("Invalid choice. Please try again.")
@@ -68,7 +72,7 @@ def victory(victor, player, opponent): # pass in victor, player, and opponent so
         print(f"You lose to the {opponent.name}! He mocks you for how pathetically you fought") # Load in opponent name here if you lose
 
     save_choice = input("Do you want to save your character? (yes/no): ").strip().lower()
-    if save_choice == 'yes':
+    if save_choice == 'yes' or 'y' or 'Y' or "Yes":
         save_filename = input("Enter the filename to save your character (without extension): ").strip() + '.json'
         player.save_to_json(save_filename)
 # This is how to initiate play again sequesnce, basic user input returning T or F
@@ -170,6 +174,7 @@ def main():
         print("Choose your opponent:")
         print("1. Warrior")
         print("2. Mugwump")
+        print("3. Reddy Kilowatt")
         opponent_choice = int(input("Enter choice: "))
         
         # Created if statement to handle when player selects their character other is ai controlled, using boolean value
@@ -177,6 +182,8 @@ def main():
             opponent = Warrior()
         elif opponent_choice == 2:
             opponent = Mugwump()
+        elif opponent_choice == 3:
+            opponent = Reddy_Kilowatt()
         else:
             print("Invalid choice, defaulting to Mugwump.") # handles if user doesnt enter selction correctly, default is mugwamp like OG program
             opponent = Mugwump()
