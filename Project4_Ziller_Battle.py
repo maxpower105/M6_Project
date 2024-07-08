@@ -1,7 +1,7 @@
 from die_Ziller import Die
 from Player_Ziller import Character
-from Warrior_Ziller import Warrior
 from mugwump_Ziller import Mugwump
+from Warrior_Ziller import Warrior
 
 def initial_menu():
     print("1. Create a new character")
@@ -37,11 +37,13 @@ def create_new_character():
     return player, player_ai
 
 def load_character_from_file():
-    filename = input("Enter the filename of the save file: ")
+    filename = input("Enter the filename of the save file (no extension, e.g., 'warrior_save'): ") + ".json"
     try:
-        return Character.load_from_json(filename)
-    except (FileNotFoundError, ValueError) as error:
-        print(f"Error loading character: {error}")
+        player = Character.load_from_json(filename)
+        player_ai = False  # Assuming loaded characters are controlled by the player
+        return player, player_ai
+    except (FileNotFoundError, ValueError) as e:
+        print(f"Error loading character: {e}")
         return initial_menu()
 
 # This selects who goes first
@@ -65,6 +67,10 @@ def victory(victor, player, opponent): # pass in victor, player, and opponent so
     else:
         print(f"You lose to the {opponent.name}! He mocks you for how pathetically you fought") # Load in opponent name here if you lose
 
+    save_choice = input("Do you want to save your character? (yes/no): ").strip().lower()
+    if save_choice == 'yes':
+        save_filename = input("Enter the filename to save your character (without extension): ").strip() + '.json'
+        player.save_to_json(save_filename)
 # This is how to initiate play again sequesnce, basic user input returning T or F
 def playAgain():
     choice = input("Would you like to play again (yes/no)? ") # User input fucntion
@@ -182,8 +188,8 @@ def main():
         # once loop exits the victory function will call the winner form the player or opponent, see code above
         victory(victor, player, opponent)
 
-        # SAve to file
-        player.save_to_json(f'{player.name.lower()}_save.json')
+        # # SAve to file
+        # player.save_to_json(f'{player.name.lower()}_save.json')
 
         # Call play again function once done
         play_again = playAgain()
