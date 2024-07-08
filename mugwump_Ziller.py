@@ -1,13 +1,25 @@
 from die_Ziller import Die
 from Player_Ziller import Character
-
 # I did warrior first so a lot was copied over
+
 class Mugwump(Character):
     def __init__(self):
-        super().__init__('Mugwump', [Die(10) for _ in range(6)]) # pull in name and hp
+        super().__init__('Mugwump', [Die(10) for _ in range(6)])  # pull in name and hp
         self.d6 = Die(6)
 
-    def __ai(self): # make it hidden like in class example
+    def set_initial_hitpoints(self):  # setting initial hitpoints
+        self.hp = sum(die.roll() for die in self.hp_dice)
+        self.max_hp = self.hp
+
+    def get_hitpoints(self):  # get current hitpoints
+        return self.hp
+
+    def take_damage(self, damage):  # general take damage math
+        self.hp -= damage
+        if self.hp < 0:
+            self.hp = 0
+
+    def __ai(self):  # make it hidden like in class example
         roll = self.d20.roll()
         if roll <= 12:
             return 1  # Razor-Sharp Claws
@@ -15,7 +27,7 @@ class Mugwump(Character):
             return 2  # Fangs of Death
         else:
             return 3  # Heal
-    # refer to warrior notes, copied over structure
+
     def attack(self, ai_controlled=False):
         if ai_controlled:
             attack_choice = self.__ai()
@@ -31,7 +43,8 @@ class Mugwump(Character):
         elif attack_choice == 2:
             return self.fangs_of_death(), "Fangs of Death"
         elif attack_choice == 3:
-            return self.lick_wounds(), "Lick Wounds"
+            self.lick_wounds()
+            return 0, "Lick Wounds"
         else:
             return 0, "Invalid Attack"
 
@@ -40,7 +53,7 @@ class Mugwump(Character):
         if hit_chance >= 13:
             return sum(self.d6.roll() for _ in range(2))
         else:
-            print("Razar claws misses!")
+            print("Razor-Sharp Claws misses!")
             return 0
 
     def fangs_of_death(self):
@@ -53,6 +66,6 @@ class Mugwump(Character):
 
     def lick_wounds(self):
         heal_amount = self.d6.roll()
-        self.hp = min(self.hp + heal_amount, self.max_hp) # min funciton, used example from class to do this
+        self.hp = min(self.hp + heal_amount, self.max_hp)  # min function, used example from class to do this
         print(f"The Mugwump licks its wounds and heals for {heal_amount} points!")
-        return -heal_amount
+
