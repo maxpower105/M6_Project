@@ -3,6 +3,46 @@ from Player_Ziller import Character
 from Warrior_Ziller import Warrior
 from mugwump_Ziller import Mugwump
 
+def initial_menu():
+    print("1. Create a new character")
+    print("2. Load a character from a save file")
+    choice = int(input("Enter choice: "))
+
+    if choice == 1:
+        return create_new_character()
+    elif choice == 2:
+        return load_character_from_file()
+    else:
+        print("Invalid choice. Please try again.")
+        return initial_menu()
+
+def create_new_character():
+    # Choose player character
+    print("Choose your character:")
+    print("1. Warrior")
+    print("2. Mugwump")
+    player_choice = int(input("Enter choice: "))
+
+    # basic boolean output based on user choice, added line for ai portion
+    if player_choice == 1:
+        player = Warrior()
+        player_ai = False
+    elif player_choice == 2:
+        player = Mugwump()
+        player_ai = False
+    else:
+        print("Invalid choice. Please try again.")
+        return create_new_character()
+
+    return player, player_ai
+
+def load_character_from_file():
+    filename = input("Enter the filename of the save file: ")
+    try:
+        return Character.load_from_json(filename)
+    except (FileNotFoundError, ValueError) as error:
+        print(f"Error loading character: {error}")
+        return initial_menu()
 
 # This selects who goes first
 def initiative(): 
@@ -117,24 +157,8 @@ def main():
         print("You may choose to fight as a Valiant Warrior defending your humble village from an evil Mugwump!")
         print("Or fight as a snarling Mugwamp and take down teh pathetic Warrior")
         print("\n Choose wisely, and let the epic battle begin!\n")
+        player, player_ai = initial_menu()
 
-        # Choose player character
-        print("Choose your character:")
-        print("1. Warrior")
-        print("2. Mugwump")
-        player_choice = int(input("Enter choice: "))
-        
-        # basic boolean output based on user choice, added line for ai portion
-        if player_choice == 1:
-            player = Warrior()
-            player_ai = False
-        elif player_choice == 2:
-            player = Mugwump()
-            player_ai = False
-        else:
-            print("Invalid choice, defaulting to Warrior.") # addded a handler in case user doesnt enter number correctly, set to warrior like OG program
-            player = Warrior() # default is warrior
-            player_ai = False # sets ai to false so mugwamp is now ai
 
         # Choose opponent character, same code as forst time asked
         print("Choose your opponent:")
@@ -156,8 +180,11 @@ def main():
         while victor == "none": # While satement so it keep looking after each round
             victor = battle(player, opponent, player_ai) # battle function goes through each round, if battle isnt decided returns none, otherwise retunrs player or opponent
         # once loop exits the victory function will call the winner form the player or opponent, see code above
-        victory(victor, player, opponent) 
-        
+        victory(victor, player, opponent)
+
+        # SAve to file
+        player.save_to_json(f'{player.name.lower()}_save.json')
+
         # Call play again function once done
         play_again = playAgain()
 
