@@ -4,7 +4,7 @@ from Player_Ziller import Character
 
 class Reddy_Kilowatt(Character):
     def __init__(self):
-        super().__init__('Redyy_Kilowatt', [Die(12) for _ in range(4)])  # pull in name and hp
+        super().__init__('Reddy_Kilowatt', [Die(12) for _ in range(4)])  # pull in name and hp
         self.d4 = Die(4)
         self.d6 = Die(6)
 
