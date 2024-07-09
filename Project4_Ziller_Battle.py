@@ -72,9 +72,12 @@ def victory(victor, player, opponent): # pass in victor, player, and opponent so
         print(f"You lose to the {opponent.name}! He mocks you for how pathetically you fought") # Load in opponent name here if you lose
 
     save_choice = input("Do you want to save your character? (yes/no): ").strip().lower()
-    if save_choice == 'yes' or 'y' or 'Y' or "Yes":
+    if save_choice in ["y", "yes", "Yes", "Y"]: # Follow instruction exaclty as asked in lab description
         save_filename = input("Enter the filename to save your character (without extension): ").strip() + '.json'
         player.save_to_json(save_filename)
+
+    else:
+        return False
 # This is how to initiate play again sequesnce, basic user input returning T or F
 def playAgain():
     choice = input("Would you like to play again (yes/no)? ") # User input fucntion
