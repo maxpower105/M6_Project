@@ -12,6 +12,7 @@ class Character(ABC):
         self.name = name
         if self.hp_dice:
             self.set_initial_hitpoints()
+        # self.nickname = nickname
 
     @abstractmethod
     def set_initial_hitpoints(self):
@@ -34,6 +35,7 @@ class Character(ABC):
             'name': self.name,
             'max_hitpoints': self.max_hp,
             'class': self.__class__.__name__
+            # 'nickname': self.nickname
         }
         full_path = os.path.abspath(filename)
         with open(full_path, 'w') as f:

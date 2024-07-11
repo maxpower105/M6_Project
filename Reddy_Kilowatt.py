@@ -37,6 +37,7 @@ class Reddy_Kilowatt(Character):
             print("1. Stab Hertz")
             print("2. Lightning")
             print("3. Recharge")
+            print('4. Special')
             attack_choice = int(input("Enter choice: "))
         # added third choice for healing
         if attack_choice == 1:
@@ -46,9 +47,11 @@ class Reddy_Kilowatt(Character):
         elif attack_choice == 3:
             self.recharge()
             return 0, "Recharge"
+        elif attack_choice == 4:
+            self.special()
         else:
             return 0, "Invalid Attack"
-
+######################################################
     def stab_hertz(self):
         hit_chance = self.d20.roll()
         if hit_chance >= 16: # 25% chance
@@ -62,7 +65,7 @@ class Reddy_Kilowatt(Character):
         if hit_chance >= 6: # 75% chance
             return sum(self.d4.roll() for _ in range(1))
         else:
-            print("Fangs of Death misses!")
+            print("Lightinig misses!")
             return 0
 
     def recharge(self):
@@ -70,3 +73,11 @@ class Reddy_Kilowatt(Character):
         self.hp = min(self.hp + heal_amount, self.max_hp)  # min function, used example from class to do this
         print(f"Reddy Kilowatt plugs in and recharges for {heal_amount} points!")
 
+    def special(self):
+        charge = self.d20.roll() * 3
+        hit_chance = self.d20.roll()
+        if hit_chance >= 6:  # 75% chance
+            return sum(self.d4.roll() for _ in range(1)) + charge
+        else:
+            print("Thunder")
+            return 0

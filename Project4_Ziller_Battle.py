@@ -24,6 +24,9 @@ def create_new_character():
     print("3. Reddy Kilowatt")
     player_choice = int(input("Enter choice: "))
 
+    # Prompt for nickname
+    nickname = input("Enter a nickname for your character: ")
+
     # basic boolean output based on user choice, added line for ai portion
     if player_choice == 1:
         player = Warrior()
@@ -38,6 +41,7 @@ def create_new_character():
         print("Invalid choice. Please try again.")
         return create_new_character()
 
+    player.name = nickname
     return player, player_ai
 
 def load_character_from_file():
