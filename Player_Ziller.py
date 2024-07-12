@@ -30,7 +30,7 @@ class Character(ABC):
     def attack(self, ai_controlled=False):
         pass
 
-    def save_to_json(self, filename):
+    def save_to_json(self, filename): # similar to online examples
         character_info = {
             'name': self.name,
             'max_hitpoints': self.max_hp,
@@ -40,18 +40,19 @@ class Character(ABC):
         full_path = os.path.abspath(filename)
         with open(full_path, 'w') as f:
             json.dump(character_info, f, indent=4)
-        print(f"Character saved to {full_path}")
+        print(f"Character saved to {full_path}") # added this for my mental health so i can see where its going on my pc
 
     @classmethod
     def load_from_json(cls, filename):
-
+# had to import here b/c i kept getting a timing error
         from mugwump_Ziller import Mugwump
         from Warrior_Ziller import Warrior
         from Reddy_Kilowatt import Reddy_Kilowatt
 
-        full_path = os.path.abspath(filename)
-        with open(full_path, 'r') as f:
-            data = json.load(f)
+        full_path = os.path.abspath(filename) # getting the file path
+        with open(full_path, 'r') as f: # this opens th epath, similar to what we did in cars assignment
+            data = json.load(f) # sets the loaded file to varialbe fo it can be itterated
+        # looks at the class in the saved character and sets the class to the character
         if data['class'] == 'Mugwump':
             character = Mugwump()
         elif data['class'] == 'Warrior':
@@ -60,7 +61,9 @@ class Character(ABC):
             character = Reddy_Kilowatt()
         else:
             raise ValueError("Unknown character class in save file.")
+
+        # same thing here, looks at the name and max hp, no need to use if here as its just a value
         character.name = data['name']
         character.max_hp = data['max_hitpoints']
-        character.hp = character.max_hp  # Assume the character is fully healed when loaded
+        character.hp = character.max_hp  # fully heals loaded character
         return character
