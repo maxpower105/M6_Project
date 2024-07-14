@@ -40,19 +40,19 @@ def create_new_character():
     else:
         print("Invalid choice. Please try again.")
         return create_new_character()
-
+    # Assign nickname ot be hte new name
     player.name = nickname
     return player, player_ai
 
 def load_character_from_file():
     filename = input("Enter the filename of the save file (no extension, e.g., 'warrior_save'): ") + ".json"
     try:
-        player = Character.load_from_json(filename)
+        player = Character.load_from_json(filename) # Assing the file to be the player
         player_ai = False  # Assuming loaded characters are controlled by the player
         return player, player_ai
-    except (FileNotFoundError, ValueError) as e:
+    except (FileNotFoundError, ValueError) as e: # error handler if they type the name wrong or its not there
         print(f"Error loading character: {e}")
-        return initial_menu()
+        return initial_menu() # GO back to initlize menu
 
 # This selects who goes first
 def initiative(): 
