@@ -23,8 +23,8 @@ import os
 # Add the current directory to the sys.path to correct directory bug
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
-import shaskeb4_battle_sim as bfs
-from shaskeb4_battle_sim import aiCharacterSelect, characterSelect, playerSelect, initiative
+from Shaske_Project_4 import shaskeb4_battle_sim as bfs
+from Shaske_Project_4.shaskeb4_battle_sim import aiCharacterSelect, characterSelect, playerSelect, initiative
 from unittest.mock import patch, MagicMock
 
 # ----------------------------------------------------------------------------------------------------------------------

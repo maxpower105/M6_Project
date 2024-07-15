@@ -3,6 +3,7 @@ import json
 from abc import ABC, abstractmethod
 from die_Ziller import Die
 
+
 class Character(ABC):
     def __init__(self, name=None, hp_dice=None):
         self.d20 = Die(20)
@@ -30,7 +31,7 @@ class Character(ABC):
     def attack(self, ai_controlled=False):
         pass
 
-    def save_to_json(self, filename): # similar to online examples
+    def save_to_json(self, filename):  # similar to online examples
         character_info = {
             'name': self.name,
             'max_hitpoints': self.max_hp,
@@ -40,18 +41,19 @@ class Character(ABC):
         full_path = os.path.abspath(filename)
         with open(full_path, 'w') as f:
             json.dump(character_info, f, indent=4)
-        print(f"Character saved to {full_path}") # added this for my mental health so i can see where its going on my pc
+        print(
+            f"Character saved to {full_path}")  # added this for my mental health so i can see where its going on my pc
 
     @classmethod
     def load_from_json(cls, filename):
-# had to import here b/c i kept getting a timing error
+        # had to import here b/c i kept getting a timing error
         from mugwump_Ziller import Mugwump
         from Warrior_Ziller import Warrior
         from Reddy_Kilowatt import Reddy_Kilowatt
-
-        full_path = os.path.abspath(filename) # getting the file path
-        with open(full_path, 'r') as f: # this opens th epath, similar to what we did in cars assignment
-            data = json.load(f) # sets the loaded file to varialbe fo it can be itterated
+        from SACEUS import Socially_Awkward_Computer_Engineering_Undergrad_Student
+        full_path = os.path.abspath(filename)  # getting the file path
+        with open(full_path, 'r') as f:  # this opens th epath, similar to what we did in cars assignment
+            data = json.load(f)  # sets the loaded file to varialbe fo it can be itterated
         # looks at the class in the saved character and sets the class to the character
         if data['class'] == 'Mugwump':
             character = Mugwump()
@@ -59,6 +61,8 @@ class Character(ABC):
             character = Warrior()
         elif data['class'] == "Reddy_Kilowatt":
             character = Reddy_Kilowatt()
+        elif data['class'] == "Socially_Awkward_Computer_Engineering_Undergrad_Student":
+            character = Socially_Awkward_Computer_Engineering_Undergrad_Student()
         else:
             raise ValueError("Unknown character class in save file.")
 

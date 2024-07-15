@@ -3,6 +3,7 @@ from Player_Ziller import Character
 from mugwump_Ziller import Mugwump
 from Warrior_Ziller import Warrior
 from Reddy_Kilowatt import Reddy_Kilowatt
+from SACEUS import SociallyAwkwardComputerEngineeringUndergradStudent
 def initial_menu():
     print("1. Create a new character")
     print("2. Load a character from a save file")
@@ -22,6 +23,7 @@ def create_new_character():
     print("1. Warrior")
     print("2. Mugwump")
     print("3. Reddy Kilowatt")
+    print("4. Socially Awkward Computer Engineering Undergrad Student")
     player_choice = int(input("Enter choice: "))
 
     # Ask user for nickname
@@ -36,6 +38,9 @@ def create_new_character():
         player_ai = False
     elif player_choice == 3:
         player = Reddy_Kilowatt()
+        player_ai = False
+    elif player_choice == 4:
+        player = SociallyAwkwardComputerEngineeringUndergradStudent()
         player_ai = False
     else:
         print("Invalid choice. Please try again.")
@@ -172,7 +177,7 @@ def main():
     while play_again: # welcome message
         print("Welcome to Battle Simulator 3001!")
         print("You may choose to fight as a Valiant Warrior defending your humble village from an evil Mugwump!")
-        print("Or fight as a snarling Mugwamp and take down teh pathetic Warrior")
+        print("Or fight as a snarling Mugwamp and take down the pathetic Warrior")
         print("\n Choose wisely, and let the epic battle begin!\n")
         player, player_ai = initial_menu()
 
@@ -182,6 +187,7 @@ def main():
         print("1. Warrior")
         print("2. Mugwump")
         print("3. Reddy Kilowatt")
+        print("4. Socially Awkward Computer Engineering Undergrad Student")
         opponent_choice = int(input("Enter choice: "))
         
         # Created if statement to handle when player selects their character other is ai controlled, using boolean value
@@ -191,13 +197,16 @@ def main():
             opponent = Mugwump()
         elif opponent_choice == 3:
             opponent = Reddy_Kilowatt()
+        elif opponent_choice == 4:
+            opponent = SociallyAwkwardComputerEngineeringUndergradStudent()
+
         else:
             print("Invalid choice, defaulting to Mugwump.") # handles if user doesnt enter selction correctly, default is mugwamp like OG program
             opponent = Mugwump()
             
-        # Victor determinintaion done in these lines    
+        # Victor determination done in these lines
         victor = "none" # set variable to none
-        while victor == "none": # While satement so it keep looking after each round
+        while victor == "none": # While statement so it keep looking after each round
             victor = battle(player, opponent, player_ai) # battle function goes through each round, if battle isnt decided returns none, otherwise retunrs player or opponent
         # once loop exits the victory function will call the winner form the player or opponent, see code above
         victory(victor, player, opponent)
