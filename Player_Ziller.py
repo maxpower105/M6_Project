@@ -50,10 +50,10 @@ class Character(ABC):
         from mugwump_Ziller import Mugwump
         from Warrior_Ziller import Warrior
         from Reddy_Kilowatt import Reddy_Kilowatt
-        from SACEUS import Socially_Awkward_Computer_Engineering_Undergrad_Student
+        from SACEUS import SociallyAwkwardComputerEngineeringUndergradStudent
         full_path = os.path.abspath(filename)  # getting the file path
         with open(full_path, 'r') as f:  # this opens th epath, similar to what we did in cars assignment
-            data = json.load(f)  # sets the loaded file to varialbe fo it can be itterated
+            data = json.load(f)  # sets the loaded file to variable fo it can be itterated
         # looks at the class in the saved character and sets the class to the character
         if data['class'] == 'Mugwump':
             character = Mugwump()

@@ -1,3 +1,13 @@
+# MSOE CSC-5120-301
+# Project 6
+# Benjamin Shaske, Walter Ziller
+# 6.20.2024
+
+# Software Used
+# Python V3.12.3
+# PyCharm V2024.1.1 (Community)
+# PyTest V8.2.2
+# ----------------------------------------------------------------------------------------------------------------------
 
 import random
 

@@ -1,3 +1,14 @@
+# MSOE CSC-5120-301
+# Project 6
+# Benjamin Shaske, Walter Ziller
+# 6.20.2024
+
+# Software Used
+# Python V3.12.3
+# PyCharm V2024.1.1 (Community)
+# PyTest V8.2.2
+# ----------------------------------------------------------------------------------------------------------------------
+
 from die_Ziller import Die
 from Player_Ziller import Character
 # I did warrior first so a lot was copied over
@@ -42,24 +53,34 @@ class Reddy_Kilowatt(Character):
             self.charging_thunder = False  # This resets the charging function back to false
             return self.thunder(), "Thunder!"  # Execute thunder attack if true
         else:
-            print("How would you like to attack?")
+            print("\nHow would you like to attack?")
             print("1. Stab Hertz")
             print("2. Shock")
             print("3. Recharge")
             print('4. Thunder (two turn attack)')         # Add this for 4th attack
-            attack_choice = int(input("Enter choice: "))
+            select_flag = False
+            while not select_flag:
+                attack_choice = input("Enter choice: ")
+                if (attack_choice.isdigit() and int(attack_choice) == 1)\
+                        or (attack_choice.isdigit() and int(attack_choice) == 2)\
+                        or (attack_choice.isdigit() and int(attack_choice) == 3)\
+                        or (attack_choice.isdigit() and int(attack_choice) == 4):
+                    select_flag = True
+                else:
+                    print('Not a valid input')
+            print()
 
         # added third choice for healing
-        if attack_choice == 1:
+        if int(attack_choice) == 1:
             return self.stab_hertz(), "Stab Hertz"
-        elif attack_choice == 2:
+        elif int(attack_choice) == 2:
             return self.shock(), "Lighining"
-        elif attack_choice == 3:
+        elif int(attack_choice) == 3:
             self.recharge()
-            return 0, "Recharge"
-        elif attack_choice == 4:
+            return 0, "Recharging for healing power!"
+        elif int(attack_choice) == 4:
             self.thunder_charge()       # Add this for 4th attack
-            return 0, "Thunder Charging" # need ot retunr 0 so damage attack result has a value
+            return 0, "nothing, Thunder Charging for next attack!" # need ot return 0 so damage attack result has a value
         else:
             return 0, "Invalid Attack"
 
@@ -68,7 +89,7 @@ class Reddy_Kilowatt(Character):
         if hit_chance >= 16: # 25% chance
             return sum(self.d4.roll() for _ in range(10))
         else:
-            print("stab hertz misses!")
+            print(f"\n{self.name}'s stab hertz attack misses!")
             return 0
 
     def shock(self):
@@ -76,17 +97,17 @@ class Reddy_Kilowatt(Character):
         if hit_chance >= 6: # 75% chance
             return sum(self.d4.roll() for _ in range(1))
         else:
-            print("Shock misses!")
+            print(f"\n{self.name}'s Shock attack misses!")
             return 0
 
     def recharge(self):
         heal_amount = sum(self.d6.roll() for _ in range(3))
         self.hp = min(self.hp + heal_amount, self.max_hp)  # min function, used example from class to do this
-        print(f"Recharges for {heal_amount} points!")
+        print(f"{self.name} recharges for {heal_amount} points!")
 
     def thunder_charge(self):       #Add this for 4th attack
         self.charging_thunder = True
-        print("Reddy Kilowatt is charging Thunder!")
+        print(f"{self.name} is charging Thunder!")
 
     def thunder(self):              # Add this for 4th attack
         charge = self.d20.roll() * 3
@@ -94,6 +115,6 @@ class Reddy_Kilowatt(Character):
         if hit_chance >= 18: #18:  # 15% chance
             return sum(self.d10.roll() for _ in range(1)) + charge
         else:
-            print("Thunder misses")
+            print(f"\n{self.name}'s charged Thunder attack misses")
             return 0
 
