@@ -1,7 +1,8 @@
+
 # MSOE CSC-5120-301
 # Project 6
 # Benjamin Shaske, Walter Ziller
-# 6.20.2024
+# 7.16.2024
 
 # Software Used
 # Python V3.12.3
@@ -9,8 +10,8 @@
 # PyTest V8.2.2
 # ----------------------------------------------------------------------------------------------------------------------
 
-from die_Ziller import Die
-from Player_Ziller import Character
+from die_Ziller_Shaske import Die
+from Player_Ziller_Shaske import Character
 # I did warrior first so a lot was copied over
 
 class Mugwump(Character):

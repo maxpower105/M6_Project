@@ -9,8 +9,8 @@
 # PyTest V8.2.2
 # ----------------------------------------------------------------------------------------------------------------------
 
-from die_Ziller import Die
-from Player_Ziller import Character
+from die_Ziller_Shaske import Die
+from Player_Ziller_Shaske import Character
 
 
 # I did warrior first so a lot was copied over
@@ -91,7 +91,7 @@ class SociallyAwkwardComputerEngineeringUndergradStudent(Character):
         if hit_chance >= 16:  # 25% chance
             return sum(self.d4.roll() for _ in range(10))
         else:
-            print(f"{self.name}'s eye contact misses! Looked away at the last second!")
+            print(f"\n{self.name}'s eye contact misses! Looked away at the last second!")
             return 0
 
     def nerd_rage(self):
@@ -99,22 +99,22 @@ class SociallyAwkwardComputerEngineeringUndergradStudent(Character):
         if hit_chance >= 6:  # 75% chance
             return sum(self.d4.roll() for _ in range(1))
         else:
-            print(f"{self.name} starts to cry, Nerd Rage misses!")
+            print(f"\n{self.name} starts to cry, Nerd Rage misses!")
             return 0
 
     def cosplay_heal(self):
         heal_amount = sum(self.d6.roll() for _ in range(3))
         self.hp = min(self.hp + heal_amount, self.max_hp)  # min function, used example from class to do this
-        print(f"{self.name} puts on cosplay Pokemon costume and recharges for {heal_amount} points!")
+        print(f"\n{self.name} puts on cosplay Pokemon costume and recharges for {heal_amount} points!")
 
     def magic_the_gathering_charge(self):  #Add this for 4th attack
         self.charging_magic = True
-        print(f"{self.name} is Soooooooo excited to tell you about Magic the Gathering collection........")
+        print(f"\n{self.name} is Soooooooo excited to tell you about Magic the Gathering collection........")
 
     def magic(self):  # Add this for 4th attack
         charge = self.d20.roll() * 3
         hit_chance = self.d20.roll()
-        if hit_chance >= 18:  #18:  # 15% chance
+        if hit_chance >= 5:  #93 % chance
             return sum(self.d10.roll() for _ in range(1)) + charge
         else:
             print(f"{self.name}'s opponent pretends to listen, Magic the Gathering tirade misses!")

@@ -9,8 +9,8 @@
 # PyTest V8.2.2
 # ----------------------------------------------------------------------------------------------------------------------
 
-from die_Ziller import Die
-from Player_Ziller import Character
+from die_Ziller_Shaske import Die
+from Player_Ziller_Shaske import Character
 # I did warrior first so a lot was copied over
 
 class Reddy_Kilowatt(Character):
