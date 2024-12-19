@@ -4,8 +4,8 @@ def test_attack(monkeypatch):
     assert attack_choice == 1
 
 
-from mugwump_Ziller import Mugwump
-from die_Ziller import Die
+from mugwump_Ziller_Shaske import Mugwump
+from die_Ziller_Shaske import Die
 import pytest
 
 def test_mugwump(): # test ai function using a seed
